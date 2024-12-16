@@ -6,7 +6,10 @@ const puppeteer = require('puppeteer-core');
 const chromium = require('@sparticuz/chromium');
 
 require('dotenv').config()
-app.use(cors());
+app.use(cors({
+  origin:  'https://api.resumecraftr.in',
+  methods: ['POST', 'GET']
+}));
 app.use(bodyParser.json());
 
 const getChromeLauncherPath = async () => {
