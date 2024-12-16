@@ -2,9 +2,7 @@ const express = require("express")
 const cors = require("cors")
 const app = express();
 const bodyParser = require('body-parser');
-// const puppeteer = require('puppeteer');
 const puppeteer = require('puppeteer-core');
-// const chromium = require('chrome-aws-lambda');
 const chromium = require('@sparticuz/chromium');
 const {
   timeout
