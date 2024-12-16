@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 const doSomePuppeteerThings = async (jsonFormData,id) => {
     const url = 'https://www.resumecraftr.in/resume-preview/'+id;
-    const browser = await puppeteer.launch({headless: false,args: ['--no-sandbox','--disable-setuid-sandbox']});
+    const browser = await puppeteer.launch({headless: true,args: ['--no-sandbox','--disable-setuid-sandbox']});
     const localStorage = { formData: jsonFormData };
     await setDomainLocalStorage(browser, url, localStorage);
   
