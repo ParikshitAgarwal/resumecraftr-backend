@@ -4,9 +4,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const puppeteer = require('puppeteer-core');
 const chromium = require('@sparticuz/chromium');
-const {
-  timeout
-} = require("puppeteer");
 
 require('dotenv').config()
 app.use(cors());
