@@ -3,13 +3,18 @@ const cors = require("cors")
 const app = express();
 const bodyParser = require('body-parser');
 const puppeteer = require('puppeteer');
+const chromium = require('chrome-aws-lambda');
 
 app.use(cors());
 app.use(bodyParser.json());
 
 const doSomePuppeteerThings = async (jsonFormData,id) => {
     const url = 'https://www.resumecraftr.in/resume-preview/'+id;
-    const browser = await puppeteer.launch({headless: true,args: ['--no-sandbox','--disable-setuid-sandbox']});
+    const browser = await puppeteer.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath,
+      headless: true,
+    });
     const localStorage = { formData: jsonFormData };
     await setDomainLocalStorage(browser, url, localStorage);
   
@@ -27,13 +32,13 @@ const doSomePuppeteerThings = async (jsonFormData,id) => {
         return targetDiv ? targetDiv.textContent : 'Div not found!';
       });
 
-      console.log("divContent:", divContent)
 
       const pdfBuffer = await page.pdf({
         printBackground: true,
         format: 'A4'
 
       });
+      await browser.close();
       return pdfBuffer;
   };
   
